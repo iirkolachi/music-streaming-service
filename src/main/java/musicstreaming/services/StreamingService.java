@@ -1,12 +1,26 @@
+package musicstreaming.services;
+
+import musicstreaming.models.*;
+
 import java.util.*;
 
 public class StreamingService {
-    private String name;
+
     private static int totalUsers;
+
+    private String name;
     private List<User> users;
 
     static {
         totalUsers = 0;
+    }
+
+    public static void incrementUsers() {
+        totalUsers++;
+    }
+
+    public static int getTotalUsers() {
+        return totalUsers;
     }
 
     public StreamingService(String name) {
@@ -15,16 +29,21 @@ public class StreamingService {
         System.out.println(name + " streaming service initialized!");
     }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public void addUser(User user) {
         users.add(user);
         incrementUsers();
     }
 
-    public List<User> getUsers() { return users; }
+    public List<User> getUsers() {
+        return users;
+    }
 
-    public static void incrementUsers() { totalUsers++; }
-    public static int getTotalUsers() { return totalUsers; }
 }

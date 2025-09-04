@@ -1,4 +1,13 @@
+package musicstreaming.app;
+
+import musicstreaming.models.*;
+import musicstreaming.services.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 public class MainApp {
+
     public static void main(String[] args) {
         StreamingService spotify = new StreamingService("Spotify");
 
@@ -13,13 +22,15 @@ public class MainApp {
         playlist.addSong(song);
         user.getLibrary().addPlaylist(playlist);
 
-        SubscriptionPlan premium = new SubscriptionPlan("basic+", 15);
+
+        SubscriptionPlan basic = new SubscriptionPlan("basic", new BigDecimal("9.99"), LocalDate.of(2025, 9, 1));
         SubscriptionService subService = new SubscriptionService();
-        subService.subscribeUser(user, premium, spotify);
+        subService.subscribeUser(user, basic, spotify);
 
         SongPlayer player = new SongPlayer();
         player.playSong(song, album, playlist);
 
+        System.out.println("Plan: " + basic.getType() + ", started on " + basic.getStartDate());
         System.out.println("Total subscription plans created: " + SubscriptionPlan.getTotalPlans());
         System.out.println("Total users subscribed: " + StreamingService.getTotalUsers());
     }
